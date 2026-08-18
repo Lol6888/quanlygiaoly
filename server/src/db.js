@@ -34,7 +34,10 @@ db.exec(`
     saint_name TEXT,
     birth_date TEXT,
     gender TEXT,
+    parent_name TEXT,
     parent_phone TEXT,
+    student_phone TEXT,
+    address TEXT,
     class_id INTEGER REFERENCES classes(id) ON DELETE SET NULL,
     notes TEXT
   );
@@ -55,6 +58,14 @@ db.exec(`
     date TEXT NOT NULL DEFAULT (date('now'))
   );
 `);
+
+// Migration: thêm cột mới cho CSDL đã tồn tại (nếu thiếu)
+const studentCols = db.prepare('PRAGMA table_info(students)').all().map((c) => c.name);
+for (const col of ['parent_name', 'student_phone', 'address']) {
+  if (!studentCols.includes(col)) {
+    db.exec(`ALTER TABLE students ADD COLUMN ${col} TEXT`);
+  }
+}
 
 // Seed tài khoản admin mặc định nếu chưa có user nào
 const userCount = db.prepare('SELECT COUNT(*) AS c FROM users').get().c;

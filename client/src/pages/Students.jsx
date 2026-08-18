@@ -1,7 +1,11 @@
 import { useEffect, useState } from 'react';
 import api from '../api';
+import BulkImport from '../components/BulkImport.jsx';
 
-const empty = { full_name: '', saint_name: '', birth_date: '', gender: '', parent_phone: '', class_id: '', notes: '' };
+const empty = {
+  full_name: '', saint_name: '', birth_date: '', gender: '',
+  parent_name: '', parent_phone: '', student_phone: '', address: '', class_id: '', notes: '',
+};
 
 export default function Students() {
   const [students, setStudents] = useState([]);
@@ -9,6 +13,7 @@ export default function Students() {
   const [filterClass, setFilterClass] = useState('');
   const [search, setSearch] = useState('');
   const [modal, setModal] = useState(null); // null | {form}
+  const [bulkOpen, setBulkOpen] = useState(false);
   const [error, setError] = useState('');
 
   function load() {
@@ -58,6 +63,7 @@ export default function Students() {
           <option value="">Tất cả lớp</option>
           {classes.map((c) => <option key={c.id} value={c.id}>{c.name}</option>)}
         </select>
+        <button className="btn ghost" onClick={() => setBulkOpen(true)}>⬆ Nhập hàng loạt</button>
         <button className="btn" onClick={openCreate}>+ Thêm học viên</button>
       </div>
 
@@ -124,9 +130,23 @@ export default function Students() {
                 </select>
               </div>
               <div className="field">
+                <label>Tên phụ huynh</label>
+                <input value={modal.parent_name || ''} onChange={(e) => setModal({ ...modal, parent_name: e.target.value })} placeholder="VD: Nguyễn Văn Bố / Trần Thị Mẹ" />
+              </div>
+            </div>
+            <div className="row">
+              <div className="field">
                 <label>SĐT phụ huynh</label>
                 <input value={modal.parent_phone || ''} onChange={(e) => setModal({ ...modal, parent_phone: e.target.value })} />
               </div>
+              <div className="field">
+                <label>SĐT học sinh</label>
+                <input value={modal.student_phone || ''} onChange={(e) => setModal({ ...modal, student_phone: e.target.value })} />
+              </div>
+            </div>
+            <div className="field">
+              <label>Địa chỉ</label>
+              <input value={modal.address || ''} onChange={(e) => setModal({ ...modal, address: e.target.value })} />
             </div>
             <div className="field">
               <label>Ghi chú</label>
@@ -139,6 +159,18 @@ export default function Students() {
             </div>
           </div>
         </div>
+      )}
+
+      {bulkOpen && (
+        <BulkImport
+          classes={classes}
+          onClose={() => setBulkOpen(false)}
+          onDone={(res) => {
+            setBulkOpen(false);
+            load();
+            alert(`Đã nhập ${res.count} học viên` + (res.skipped ? `, bỏ qua ${res.skipped} dòng thiếu họ tên` : ''));
+          }}
+        />
       )}
     </div>
   );
