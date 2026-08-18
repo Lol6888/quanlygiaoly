@@ -1,11 +1,26 @@
 import { useEffect, useState } from 'react';
 import api from '../api';
 import BulkImport from '../components/BulkImport.jsx';
+import { exportXlsx, exportPdf, STT_COL, fileSlug } from '../lib/exportUtils';
 
 const empty = {
   full_name: '', saint_name: '', birth_date: '', gender: '',
   parent_name: '', parent_phone: '', student_phone: '', address: '', class_id: '', notes: '',
 };
+
+const studentColumns = [
+  STT_COL,
+  { label: 'Tên thánh', get: (s) => s.saint_name || '', width: 14 },
+  { label: 'Họ và tên', get: (s) => s.full_name, width: 22 },
+  { label: 'Ngày sinh', get: (s) => s.birth_date || '', width: 12 },
+  { label: 'Giới tính', get: (s) => s.gender || '', width: 9 },
+  { label: 'Lớp', get: (s) => s.class_name || '', width: 14 },
+  { label: 'Phụ huynh', get: (s) => s.parent_name || '', width: 22 },
+  { label: 'SĐT phụ huynh', get: (s) => s.parent_phone || '', width: 14 },
+  { label: 'SĐT học sinh', get: (s) => s.student_phone || '', width: 14 },
+  { label: 'Địa chỉ', get: (s) => s.address || '', width: 30 },
+  { label: 'Ghi chú', get: (s) => s.notes || '', width: 20 },
+];
 
 export default function Students() {
   const [students, setStudents] = useState([]);
@@ -49,6 +64,17 @@ export default function Students() {
     s.full_name.toLowerCase().includes(search.toLowerCase())
   );
 
+  const clsName = filterClass
+    ? classes.find((c) => String(c.id) === String(filterClass))?.name
+    : null;
+  const exportMeta = {
+    title: 'Danh sách học viên',
+    subtitle: clsName ? `Lớp: ${clsName}` : 'Tất cả các lớp',
+    columns: studentColumns,
+    rows: filtered,
+  };
+  const exportName = `danh-sach-hoc-vien${clsName ? '-' + fileSlug(clsName) : ''}`;
+
   return (
     <div>
       <h1>Quản lý học viên</h1>
@@ -64,6 +90,16 @@ export default function Students() {
           {classes.map((c) => <option key={c.id} value={c.id}>{c.name}</option>)}
         </select>
         <button className="btn ghost" onClick={() => setBulkOpen(true)}>⬆ Nhập hàng loạt</button>
+        <button
+          className="btn ghost"
+          disabled={filtered.length === 0}
+          onClick={() => exportXlsx({ filename: `${exportName}.xlsx`, sheetName: 'Học viên', ...exportMeta })}
+        >
+          ⬇ Excel
+        </button>
+        <button className="btn ghost" disabled={filtered.length === 0} onClick={() => exportPdf(exportMeta)}>
+          🖨 PDF
+        </button>
         <button className="btn" onClick={openCreate}>+ Thêm học viên</button>
       </div>
 

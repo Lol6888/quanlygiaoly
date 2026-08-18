@@ -1,11 +1,19 @@
 import { useEffect, useState } from 'react';
 import api from '../api';
+import { exportXlsx, exportPdf, STT_COL, ATT_LABEL, fileSlug } from '../lib/exportUtils';
 
 const today = () => new Date().toISOString().slice(0, 10);
 const STATUSES = [
   { key: 'present', label: 'Có mặt' },
   { key: 'absent', label: 'Vắng' },
   { key: 'late', label: 'Trễ' },
+];
+
+const attColumns = [
+  STT_COL,
+  { label: 'Tên thánh', get: (r) => r.saint_name || '', width: 14 },
+  { label: 'Họ và tên', get: (r) => r.full_name, width: 24 },
+  { label: 'Trạng thái', get: (r) => ATT_LABEL[r.status] || 'Chưa điểm danh', width: 16 },
 ];
 
 export default function Attendance() {
@@ -39,6 +47,19 @@ export default function Attendance() {
     setSaved(true);
   }
 
+  const className = classes.find((c) => String(c.id) === String(classId))?.name || '';
+  function attMeta() {
+    return {
+      title: 'Phiếu điểm danh',
+      subtitle: `Lớp: ${className}  ·  Ngày: ${date.split('-').reverse().join('/')}`,
+      columns: attColumns,
+      rows,
+    };
+  }
+  function exportExcel() {
+    exportXlsx({ filename: `diem-danh-${fileSlug(className)}-${date}.xlsx`, sheetName: 'Điểm danh', ...attMeta() });
+  }
+
   return (
     <div>
       <h1>Điểm danh</h1>
@@ -49,7 +70,11 @@ export default function Attendance() {
         </select>
         <input type="date" value={date} onChange={(e) => setDate(e.target.value)} style={{ width: 180 }} />
         {classId && rows.length > 0 && (
-          <button className="btn ghost" onClick={() => markAll('present')}>Đánh dấu tất cả có mặt</button>
+          <>
+            <button className="btn ghost" onClick={() => markAll('present')}>Đánh dấu tất cả có mặt</button>
+            <button className="btn ghost" onClick={exportExcel}>⬇ Excel</button>
+            <button className="btn ghost" onClick={() => exportPdf(attMeta())}>🖨 PDF</button>
+          </>
         )}
       </div>
 

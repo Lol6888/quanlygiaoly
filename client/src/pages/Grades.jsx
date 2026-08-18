@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import api from '../api';
+import { exportXlsx, exportPdf, STT_COL, fileSlug } from '../lib/exportUtils';
 
 const today = () => new Date().toISOString().slice(0, 10);
 
@@ -49,6 +50,46 @@ export default function Grades() {
     ? (grades.reduce((s, g) => s + g.score, 0) / grades.length).toFixed(1)
     : null;
 
+  const className = classes.find((c) => String(c.id) === String(classId))?.name || '';
+
+  // Bảng điểm cả lớp: pivot học viên × cột điểm + TB (tải điểm mọi học viên rồi xuất)
+  async function exportGradeSheet(mode) {
+    const all = await Promise.all(
+      students.map((s) =>
+        api.get(`/grades?student_id=${s.id}`).then((r) => ({ student: s, grades: r.data }))
+      )
+    );
+    const titles = [];
+    for (const { grades: gs } of all)
+      for (const g of gs) if (!titles.includes(g.title)) titles.push(g.title);
+
+    const columns = [
+      STT_COL,
+      { label: 'Tên thánh', get: (r) => r.student.saint_name || '', width: 14 },
+      { label: 'Họ và tên', get: (r) => r.student.full_name, width: 24 },
+      ...titles.map((t) => ({
+        label: t,
+        get: (r) => {
+          const g = r.grades.find((x) => x.title === t);
+          return g ? g.score : '';
+        },
+        width: 12,
+      })),
+      {
+        label: 'TB',
+        get: (r) =>
+          r.grades.length
+            ? (r.grades.reduce((s, g) => s + g.score, 0) / r.grades.length).toFixed(1)
+            : '',
+        width: 8,
+      },
+    ];
+    const meta = { title: 'Bảng điểm', subtitle: `Lớp: ${className}`, columns, rows: all };
+    if (mode === 'excel')
+      exportXlsx({ filename: `bang-diem-${fileSlug(className)}.xlsx`, sheetName: 'Bảng điểm', ...meta });
+    else exportPdf(meta);
+  }
+
   return (
     <div>
       <h1>Điểm số</h1>
@@ -57,6 +98,12 @@ export default function Grades() {
           <option value="">-- Chọn lớp --</option>
           {classes.map((c) => <option key={c.id} value={c.id}>{c.name}</option>)}
         </select>
+        {classId && students.length > 0 && (
+          <>
+            <button className="btn ghost" onClick={() => exportGradeSheet('excel')}>⬇ Excel bảng điểm</button>
+            <button className="btn ghost" onClick={() => exportGradeSheet('pdf')}>🖨 PDF bảng điểm</button>
+          </>
+        )}
       </div>
 
       {classId && (
