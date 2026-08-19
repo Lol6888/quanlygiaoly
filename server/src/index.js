@@ -8,6 +8,7 @@ import classesRoutes from './routes/classes.js';
 import studentsRoutes from './routes/students.js';
 import attendanceRoutes from './routes/attendance.js';
 import gradesRoutes from './routes/grades.js';
+import dashboardRoutes from './routes/dashboard.js';
 
 const app = express();
 app.use(cors());
@@ -20,6 +21,7 @@ app.use('/api/classes', classesRoutes);
 app.use('/api/students', studentsRoutes);
 app.use('/api/attendance', attendanceRoutes);
 app.use('/api/grades', gradesRoutes);
+app.use('/api/dashboard', dashboardRoutes);
 
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {

@@ -47,6 +47,11 @@ export default function Layout({ children }) {
               </NavLink>
             ))}
         </nav>
+        <div className="side-card">
+          <div className="emoji">📖</div>
+          <div className="t">Đồng hành cùng các em thiếu nhi trong hành trình đức tin.</div>
+          <button className="btn-w" onClick={() => navigate('/students')}>Quản lý học viên</button>
+        </div>
       </aside>
 
       <div className="main">
