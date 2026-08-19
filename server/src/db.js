@@ -39,7 +39,8 @@ db.exec(`
     student_phone TEXT,
     address TEXT,
     class_id INTEGER REFERENCES classes(id) ON DELETE SET NULL,
-    notes TEXT
+    notes TEXT,
+    sacrament TEXT DEFAULT 'none'  -- 'none' | 'vo_long' | 'them_suc'
   );
 
   CREATE TABLE IF NOT EXISTS attendance (
@@ -65,6 +66,9 @@ for (const col of ['parent_name', 'student_phone', 'address']) {
   if (!studentCols.includes(col)) {
     db.exec(`ALTER TABLE students ADD COLUMN ${col} TEXT`);
   }
+}
+if (!studentCols.includes('sacrament')) {
+  db.exec("ALTER TABLE students ADD COLUMN sacrament TEXT DEFAULT 'none'");
 }
 
 // Seed tài khoản admin mặc định nếu chưa có user nào

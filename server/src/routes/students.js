@@ -45,8 +45,8 @@ router.get('/:id', requireAuth, (req, res) => {
 const insertStudent = (s) =>
   db
     .prepare(
-      `INSERT INTO students (full_name, saint_name, birth_date, gender, parent_name, parent_phone, student_phone, address, class_id, notes)
-       VALUES (@full_name, @saint_name, @birth_date, @gender, @parent_name, @parent_phone, @student_phone, @address, @class_id, @notes)`
+      `INSERT INTO students (full_name, saint_name, birth_date, gender, parent_name, parent_phone, student_phone, address, class_id, notes, sacrament)
+       VALUES (@full_name, @saint_name, @birth_date, @gender, @parent_name, @parent_phone, @student_phone, @address, @class_id, @notes, @sacrament)`
     )
     .run({
       full_name: s.full_name,
@@ -59,6 +59,7 @@ const insertStudent = (s) =>
       address: s.address || null,
       class_id: s.class_id || null,
       notes: s.notes || null,
+      sacrament: s.sacrament || 'none',
     });
 
 // Thêm học viên
@@ -92,11 +93,11 @@ router.put('/:id', requireAuth, (req, res) => {
   if (!existing) return res.status(404).json({ error: 'Không tìm thấy học viên' });
   const {
     full_name, saint_name, birth_date, gender,
-    parent_name, parent_phone, student_phone, address, class_id, notes,
+    parent_name, parent_phone, student_phone, address, class_id, notes, sacrament,
   } = req.body || {};
   db.prepare(
     `UPDATE students SET full_name = ?, saint_name = ?, birth_date = ?, gender = ?,
-     parent_name = ?, parent_phone = ?, student_phone = ?, address = ?, class_id = ?, notes = ? WHERE id = ?`
+     parent_name = ?, parent_phone = ?, student_phone = ?, address = ?, class_id = ?, notes = ?, sacrament = ? WHERE id = ?`
   ).run(
     full_name ?? existing.full_name,
     saint_name ?? existing.saint_name,
@@ -108,6 +109,7 @@ router.put('/:id', requireAuth, (req, res) => {
     address ?? existing.address,
     class_id ?? existing.class_id,
     notes ?? existing.notes,
+    sacrament ?? existing.sacrament,
     req.params.id
   );
   res.json(db.prepare('SELECT * FROM students WHERE id = ?').get(req.params.id));

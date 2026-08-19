@@ -304,3 +304,13 @@ label { display: block; font-size: 13px; color: var(--muted); margin-bottom: 6px
 .side-card .emoji { font-size: 30px; }
 .side-card .t { font-weight: 600; font-size: 14px; margin: 8px 0 12px; line-height: 1.4; }
 .side-card .btn-w { background: #fff; color: var(--primary); border: none; width: 100%; padding: 9px; border-radius: 10px; font-weight: 600; cursor: pointer; font-size: 14px; }
+
+/* Huy hiệu bí tích */
+.sac-badge {
+  display: inline-grid; place-items: center;
+  width: 22px; height: 22px; border-radius: 50%;
+  font-size: 12px; line-height: 1; margin-left: 6px;
+  vertical-align: middle; cursor: default;
+}
+.sac-legend { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; font-size: 13px; color: var(--muted); margin-bottom: 14px; }
+.sac-legend .it { display: inline-flex; align-items: center; gap: 6px; }

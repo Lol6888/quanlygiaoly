@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react';
 import api from '../api';
 import BulkImport from '../components/BulkImport.jsx';
+import SacramentBadge, { SACRAMENTS, SACRAMENT_OPTIONS } from '../components/SacramentBadge.jsx';
 import { exportXlsx, exportPdf, STT_COL, fileSlug } from '../lib/exportUtils';
 
 const empty = {
   full_name: '', saint_name: '', birth_date: '', gender: '',
   parent_name: '', parent_phone: '', student_phone: '', address: '', class_id: '', notes: '',
+  sacrament: 'none',
 };
 
 const studentColumns = [
@@ -104,6 +106,12 @@ export default function Students() {
       </div>
 
       <div className="panel">
+        <div className="sac-legend">
+          <span>Bí tích:</span>
+          <span className="it"><SacramentBadge value="vo_long" /> Vỡ Lòng</span>
+          <span className="it"><SacramentBadge value="them_suc" /> Thêm Sức</span>
+          <span className="it"><SacramentBadge value="none" /> Chưa nhận</span>
+        </div>
         <table>
           <thead>
             <tr>
@@ -114,7 +122,10 @@ export default function Students() {
             {filtered.map((s) => (
               <tr key={s.id}>
                 <td>{s.saint_name || '—'}</td>
-                <td>{s.full_name}</td>
+                <td>
+                  {s.full_name}
+                  <SacramentBadge value={s.sacrament} />
+                </td>
                 <td>{s.birth_date || '—'}</td>
                 <td>{s.class_name || <span className="muted">Chưa xếp lớp</span>}</td>
                 <td>{s.parent_phone || '—'}</td>
@@ -154,6 +165,14 @@ export default function Students() {
                   <option value="">—</option>
                   <option value="Nam">Nam</option>
                   <option value="Nữ">Nữ</option>
+                </select>
+              </div>
+              <div className="field">
+                <label>Bí tích đã nhận</label>
+                <select value={modal.sacrament || 'none'} onChange={(e) => setModal({ ...modal, sacrament: e.target.value })}>
+                  {SACRAMENT_OPTIONS.map((k) => (
+                    <option key={k} value={k}>{SACRAMENTS[k].label}</option>
+                  ))}
                 </select>
               </div>
             </div>
