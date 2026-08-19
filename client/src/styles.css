@@ -91,7 +91,7 @@ h1, h2, h3, .brand { font-family: inherit; letter-spacing: -0.022em; }
   border-bottom: 0.5px solid var(--border);
 }
 .topbar .greeting { line-height: 1.2; }
-.topbar .greeting .hi { font-size: 18px; font-weight: 700; font-family: 'Poppins', sans-serif; color: var(--heading); }
+.topbar .greeting .hi { font-size: 18px; font-weight: 700; font-family: inherit; color: var(--heading); }
 .topbar .greeting .sub { font-size: 13px; color: var(--muted); }
 .topbar .spacer { flex: 1; }
 .topbar .icon-btn {
@@ -107,7 +107,7 @@ h1, h2, h3, .brand { font-family: inherit; letter-spacing: -0.022em; }
   width: 42px; height: 42px; border-radius: 50%;
   background: linear-gradient(135deg, var(--primary), #8b5cf6);
   color: #fff; display: grid; place-items: center; font-weight: 600;
-  font-family: 'Poppins', sans-serif;
+  font-family: inherit;
 }
 .user-meta { line-height: 1.25; }
 .user-meta .name { font-size: 14px; font-weight: 600; color: var(--heading); }
@@ -115,7 +115,7 @@ h1, h2, h3, .brand { font-family: inherit; letter-spacing: -0.022em; }
 
 /* Điều hướng mobile (mặc định ẩn trên desktop) */
 .hamburger { display: none; background: none; border: none; font-size: 24px; color: var(--heading); cursor: pointer; padding: 2px 6px; line-height: 1; }
-.topbar-brand { display: none; align-items: center; gap: 8px; font-weight: 700; font-family: 'Poppins', sans-serif; color: var(--heading); font-size: 16px; }
+.topbar-brand { display: none; align-items: center; gap: 8px; font-weight: 700; font-family: inherit; color: var(--heading); font-size: 16px; }
 .topbar-brand .logo { width: 30px; height: 30px; border-radius: 9px; background: var(--primary); color: #fff; display: grid; place-items: center; font-size: 15px; }
 .nav-backdrop { display: none; }
 
@@ -206,7 +206,7 @@ label { display: block; font-size: 13px; color: var(--muted); margin-bottom: 6px
   display: grid; place-items: center; flex-shrink: 0;
 }
 .stat .icon svg { width: 26px; height: 26px; }
-.stat .num { font-size: 26px; font-weight: 700; font-family: 'Poppins', sans-serif; color: var(--heading); line-height: 1.1; }
+.stat .num { font-size: 26px; font-weight: 700; font-family: inherit; color: var(--heading); line-height: 1.1; }
 .stat .lbl { color: var(--muted); font-size: 13px; margin-top: 3px; }
 .ic-indigo { background: #eef0ff; color: #4f46e5; }
 .ic-green  { background: #e6f9f0; color: #12b76a; }
@@ -240,7 +240,7 @@ label { display: block; font-size: 13px; color: var(--muted); margin-bottom: 6px
   padding: 44px 20px;
   font-size: 42px;
   font-weight: 800;
-  font-family: 'Poppins', sans-serif;
+  font-family: inherit;
   color: var(--primary);
   min-height: 60px;
   background: var(--primary-soft);
@@ -305,7 +305,7 @@ label { display: block; font-size: 13px; color: var(--muted); margin-bottom: 6px
   box-shadow: var(--shadow-sm);
 }
 .dash-stat .lbl { font-size: 14px; color: #55608a; margin-bottom: 8px; }
-.dash-stat .num { font-size: 28px; font-weight: 700; font-family: 'Poppins', sans-serif; color: var(--heading); line-height: 1; }
+.dash-stat .num { font-size: 28px; font-weight: 700; font-family: inherit; color: var(--heading); line-height: 1; }
 .dash-stat .ic { width: 52px; height: 52px; border-radius: 14px; display: grid; place-items: center; flex-shrink: 0; }
 .dash-stat .ic svg { width: 26px; height: 26px; }
 .st-purple { background: #f2ecff; } .st-purple .ic { background: #e2d4ff; color: #7c3aed; }
@@ -326,7 +326,7 @@ label { display: block; font-size: 13px; color: var(--muted); margin-bottom: 6px
 .donut { position: relative; width: 190px; height: 190px; }
 .donut .center { position: absolute; inset: 0; display: grid; place-items: center; text-align: center; }
 .donut .center .t { font-size: 12px; color: var(--muted); }
-.donut .center .v { font-size: 26px; font-weight: 700; font-family: 'Poppins', sans-serif; color: var(--heading); }
+.donut .center .v { font-size: 26px; font-weight: 700; font-family: inherit; color: var(--heading); }
 .legend { display: flex; flex-direction: column; gap: 8px; margin-top: 18px; width: 100%; }
 .legend .row { display: flex; align-items: center; gap: 8px; font-size: 13px; color: #55608a; }
 .legend .row > * { flex: 0 0 auto; min-width: 0; }
@@ -369,3 +369,66 @@ label { display: block; font-size: 13px; color: var(--muted); margin-bottom: 6px
 }
 .sac-legend { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; font-size: 13px; color: var(--muted); margin-bottom: 14px; }
 .sac-legend .it { display: inline-flex; align-items: center; gap: 6px; }
+
+/* ============ Nền ảnh + kính mờ (iOS glassmorphism) ============ */
+:root { --bg-image: url('/shepherd.jpg'); }
+
+/* nền dự phòng (nếu chưa có ảnh) */
+body { background: linear-gradient(160deg, #f3e2c8 0%, #e7d3b6 40%, #cfe0ea 100%); }
+body::before {
+  content: ''; position: fixed; inset: 0; z-index: -2;
+  background: var(--bg-image) center / cover no-repeat;
+}
+body::after {  /* lớp phủ nhẹ để chữ dễ đọc */
+  content: ''; position: fixed; inset: 0; z-index: -1;
+  background: rgba(244, 244, 248, 0.45);
+}
+
+/* Kính mờ cho các bề mặt */
+.panel {
+  background: rgba(255, 255, 255, 0.68);
+  backdrop-filter: blur(22px) saturate(160%);
+  -webkit-backdrop-filter: blur(22px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+.sidebar {
+  background: rgba(255, 255, 255, 0.62);
+  backdrop-filter: blur(24px) saturate(170%);
+  -webkit-backdrop-filter: blur(24px) saturate(170%);
+  border-right: 1px solid rgba(255, 255, 255, 0.4);
+}
+.topbar {
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(22px) saturate(180%);
+  -webkit-backdrop-filter: blur(22px) saturate(180%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+}
+.modal {
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(30px) saturate(180%);
+  -webkit-backdrop-filter: blur(30px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+}
+.modal-backdrop { background: rgba(20, 24, 40, 0.35); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
+
+/* Thẻ thống kê dashboard -> kính mờ */
+.dash-stat {
+  backdrop-filter: blur(18px) saturate(160%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+.st-purple { background: rgba(242, 236, 255, 0.62); }
+.st-blue { background: rgba(234, 241, 255, 0.62); }
+.st-peach { background: rgba(255, 241, 234, 0.62); }
+.st-green { background: rgba(233, 250, 241, 0.62); }
+
+/* Trang đăng nhập: ảnh nền + thẻ kính */
+.login-wrap { background: var(--bg-image) center / cover no-repeat; }
+.login-card {
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(30px) saturate(180%);
+  -webkit-backdrop-filter: blur(30px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+}
