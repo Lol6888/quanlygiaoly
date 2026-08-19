@@ -1,4 +1,8 @@
 import axios from 'axios';
+import localApi from './localApi';
+
+// Bản demo (Vercel): dùng localStorage thay backend khi build với VITE_USE_LOCAL=1
+const USE_LOCAL = import.meta.env.VITE_USE_LOCAL === '1';
 
 const api = axios.create({ baseURL: '/api' });
 
@@ -22,4 +26,4 @@ api.interceptors.response.use(
   }
 );
 
-export default api;
+export default USE_LOCAL ? localApi : api;

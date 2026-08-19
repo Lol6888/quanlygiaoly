@@ -1,0 +1,310 @@
+{
+  "classes": [
+    {
+      "id": 1,
+      "name": "Ấu Nhi 1",
+      "year": "2025-2026",
+      "teacher_id": null
+    },
+    {
+      "id": 2,
+      "name": "Thiếu Nhi 1",
+      "year": "2025-2026",
+      "teacher_id": null
+    }
+  ],
+  "students": [
+    {
+      "id": 1,
+      "full_name": "Nguyễn Văn An",
+      "saint_name": "Phêrô",
+      "birth_date": "2016-03-12",
+      "gender": null,
+      "parent_name": "Nguyễn Văn Bình / Trần Thị Mai",
+      "parent_phone": "0901234567",
+      "student_phone": null,
+      "address": "12 Nguyễn Trãi, P.5, Q.5",
+      "class_id": 1,
+      "notes": null,
+      "sacrament": "none"
+    },
+    {
+      "id": 2,
+      "full_name": "Trần Thị Bích",
+      "saint_name": "Maria",
+      "birth_date": "2016-07-25",
+      "gender": null,
+      "parent_name": "Trần Văn Cường",
+      "parent_phone": "0912345678",
+      "student_phone": null,
+      "address": "34 Lê Lợi, P.2, Q.1",
+      "class_id": 1,
+      "notes": null,
+      "sacrament": "none"
+    },
+    {
+      "id": 3,
+      "full_name": "Lê Hoàng Dũng",
+      "saint_name": "Giuse",
+      "birth_date": "2015-11-08",
+      "gender": null,
+      "parent_name": "Lê Văn Đức / Phạm Thị Hoa",
+      "parent_phone": "0987654321",
+      "student_phone": null,
+      "address": "56 Hai Bà Trưng, P.6, Q.3",
+      "class_id": 2,
+      "notes": "Hay vắng",
+      "sacrament": "vo_long"
+    },
+    {
+      "id": 4,
+      "full_name": "Phạm Thị Hồng",
+      "saint_name": "Têrêsa",
+      "birth_date": "2016-02-19",
+      "gender": null,
+      "parent_name": "Phạm Văn Giang",
+      "parent_phone": "0909988776",
+      "student_phone": null,
+      "address": "78 Trần Hưng Đạo, P.7, Q.5",
+      "class_id": 1,
+      "notes": null,
+      "sacrament": "none"
+    },
+    {
+      "id": 5,
+      "full_name": "Vũ Minh Khôi",
+      "saint_name": "Antôn",
+      "birth_date": "2015-09-30",
+      "gender": null,
+      "parent_name": "Vũ Văn Hải",
+      "parent_phone": "0933112233",
+      "student_phone": "0977001122",
+      "address": "90 Nguyễn Huệ, P.1, Q.1",
+      "class_id": 1,
+      "notes": null,
+      "sacrament": "none"
+    },
+    {
+      "id": 6,
+      "full_name": "Đỗ Thị Lan",
+      "saint_name": "Anna",
+      "birth_date": "2016-06-14",
+      "gender": null,
+      "parent_name": "Đỗ Văn Long / Bùi Thị Ngọc",
+      "parent_phone": "0944556677",
+      "student_phone": null,
+      "address": "11 CMT8, P.10, Q.3",
+      "class_id": 1,
+      "notes": null,
+      "sacrament": "none"
+    },
+    {
+      "id": 7,
+      "full_name": "Hoàng Văn Nam",
+      "saint_name": "Phaolô",
+      "birth_date": "2013-12-03",
+      "gender": null,
+      "parent_name": "Hoàng Văn Phú",
+      "parent_phone": "0955667788",
+      "student_phone": null,
+      "address": "22 Điện Biên Phủ, P.15, Q.Bình Thạnh",
+      "class_id": 2,
+      "notes": null,
+      "sacrament": "vo_long"
+    },
+    {
+      "id": 8,
+      "full_name": "Bùi Thị Oanh",
+      "saint_name": "Maria",
+      "birth_date": "2013-04-21",
+      "gender": null,
+      "parent_name": "Bùi Văn Quang",
+      "parent_phone": "0966778899",
+      "student_phone": null,
+      "address": "33 Xô Viết Nghệ Tĩnh, P.17, Q.Bình Thạnh",
+      "class_id": 2,
+      "notes": null,
+      "sacrament": "them_suc"
+    },
+    {
+      "id": 9,
+      "full_name": "Ngô Gia Bảo",
+      "saint_name": "Gioan",
+      "birth_date": "2014-08-27",
+      "gender": null,
+      "parent_name": "Ngô Văn Sơn / Lý Thị Tuyết",
+      "parent_phone": "0977889900",
+      "student_phone": null,
+      "address": "44 Phan Đăng Lưu, P.3, Q.Phú Nhuận",
+      "class_id": 2,
+      "notes": null,
+      "sacrament": "none"
+    },
+    {
+      "id": 10,
+      "full_name": "Lý Thị Thu",
+      "saint_name": "Catarina",
+      "birth_date": "2013-01-05",
+      "gender": null,
+      "parent_name": "Lý Văn Tài",
+      "parent_phone": "0988990011",
+      "student_phone": null,
+      "address": "55 Nguyễn Văn Trỗi, P.8, Q.Phú Nhuận",
+      "class_id": 2,
+      "notes": null,
+      "sacrament": "them_suc"
+    },
+    {
+      "id": 11,
+      "full_name": "Đặng Quốc Việt",
+      "saint_name": "Micae",
+      "birth_date": "2014-10-17",
+      "gender": null,
+      "parent_name": "Đặng Văn Út",
+      "parent_phone": "0999001122",
+      "student_phone": null,
+      "address": "66 Hoàng Văn Thụ, P.9, Q.Tân Bình",
+      "class_id": 2,
+      "notes": "Mới chuyển đến",
+      "sacrament": "none"
+    },
+    {
+      "id": 12,
+      "full_name": "Trịnh Thị Xuân",
+      "saint_name": "Lucia",
+      "birth_date": "2013-05-09",
+      "gender": null,
+      "parent_name": "Trịnh Văn Yên / Đinh Thị Bảy",
+      "parent_phone": "0900112233",
+      "student_phone": null,
+      "address": "77 Cộng Hòa, P.13, Q.Tân Bình",
+      "class_id": 2,
+      "notes": null,
+      "sacrament": "none"
+    }
+  ],
+  "grades": [
+    {
+      "id": 1,
+      "student_id": 3,
+      "title": "Kiểm tra 15 phút",
+      "score": 9,
+      "date": "2026-08-05"
+    },
+    {
+      "id": 2,
+      "student_id": 3,
+      "title": "Giữa học kỳ",
+      "score": 9.5,
+      "date": "2026-08-12"
+    },
+    {
+      "id": 3,
+      "student_id": 1,
+      "title": "Kiểm tra 15 phút",
+      "score": 6.5,
+      "date": "2026-08-05"
+    },
+    {
+      "id": 4,
+      "student_id": 1,
+      "title": "Giữa học kỳ",
+      "score": 9.4,
+      "date": "2026-08-12"
+    },
+    {
+      "id": 5,
+      "student_id": 4,
+      "title": "Kiểm tra 15 phút",
+      "score": 6.1,
+      "date": "2026-08-05"
+    },
+    {
+      "id": 6,
+      "student_id": 4,
+      "title": "Giữa học kỳ",
+      "score": 9.1,
+      "date": "2026-08-12"
+    },
+    {
+      "id": 7,
+      "student_id": 2,
+      "title": "Kiểm tra 15 phút",
+      "score": 9.4,
+      "date": "2026-08-05"
+    },
+    {
+      "id": 8,
+      "student_id": 2,
+      "title": "Giữa học kỳ",
+      "score": 8.8,
+      "date": "2026-08-12"
+    },
+    {
+      "id": 9,
+      "student_id": 5,
+      "title": "Kiểm tra 15 phút",
+      "score": 8.9,
+      "date": "2026-08-05"
+    },
+    {
+      "id": 10,
+      "student_id": 5,
+      "title": "Giữa học kỳ",
+      "score": 7.5,
+      "date": "2026-08-12"
+    },
+    {
+      "id": 11,
+      "student_id": 6,
+      "title": "Kiểm tra 15 phút",
+      "score": 9,
+      "date": "2026-08-05"
+    },
+    {
+      "id": 12,
+      "student_id": 6,
+      "title": "Giữa học kỳ",
+      "score": 7.2,
+      "date": "2026-08-12"
+    }
+  ],
+  "attendance": [
+    {
+      "id": 1,
+      "student_id": 3,
+      "date": "2026-08-16",
+      "status": "present"
+    },
+    {
+      "id": 2,
+      "student_id": 1,
+      "date": "2026-08-16",
+      "status": "present"
+    },
+    {
+      "id": 3,
+      "student_id": 4,
+      "date": "2026-08-16",
+      "status": "present"
+    },
+    {
+      "id": 4,
+      "student_id": 2,
+      "date": "2026-08-16",
+      "status": "absent"
+    },
+    {
+      "id": 5,
+      "student_id": 5,
+      "date": "2026-08-16",
+      "status": "late"
+    },
+    {
+      "id": 6,
+      "student_id": 6,
+      "date": "2026-08-16",
+      "status": "present"
+    }
+  ]
+}

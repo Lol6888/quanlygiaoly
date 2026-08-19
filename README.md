@@ -63,3 +63,15 @@ quanlygiaoly/
 - Cơ sở dữ liệu SQLite được lưu tại `server/data/quanlygiaoly.db` (đã bỏ qua trong git).
 - Đặt biến môi trường `JWT_SECRET` trong `server/.env` cho môi trường production (xem `server/.env.example`).
 - Build frontend: `npm run build` → kết quả tại `client/dist`.
+
+## Bản demo trên Vercel (client-only)
+
+Bản deploy trên Vercel chạy **hoàn toàn phía trình duyệt** (không backend): tầng dữ liệu
+dùng `localStorage` thay cho Express/SQLite, có sẵn dữ liệu mẫu. Dữ liệu lưu riêng trên
+máy mỗi người xem (không chia sẻ chung) — phù hợp để xem thử/live demo.
+
+- Cấu hình build ở `vercel.json` (build `client` với biến `VITE_USE_LOCAL=1`, định tuyến SPA).
+- Bật/tắt chế độ này bằng biến môi trường `VITE_USE_LOCAL=1` khi build.
+- Đăng nhập demo: `admin` / `admin123` (hoặc giáo lý viên `glv` / `glv123`).
+
+> Chạy local với `npm run dev` vẫn dùng backend thật (SQLite) như bình thường.
