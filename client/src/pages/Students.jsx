@@ -110,7 +110,7 @@ export default function Students() {
           <span>Bí tích:</span>
           <span className="it"><SacramentBadge value="vo_long" /> Vỡ Lòng</span>
           <span className="it"><SacramentBadge value="them_suc" /> Thêm Sức</span>
-          <span className="it"><SacramentBadge value="none" /> Chưa nhận</span>
+          <span className="it">(không icon = chưa nhận)</span>
         </div>
         <table>
           <thead>

@@ -9,7 +9,9 @@ export const SACRAMENTS = {
 export const SACRAMENT_OPTIONS = ['none', 'vo_long', 'them_suc'];
 
 export default function SacramentBadge({ value }) {
-  const s = SACRAMENTS[value] || SACRAMENTS.none;
+  // Chưa nhận bí tích -> không hiển thị icon
+  if (value !== 'vo_long' && value !== 'them_suc') return null;
+  const s = SACRAMENTS[value];
   return (
     <span className="sac-badge" title={s.label} style={{ background: s.bg, color: s.color }}>
       {s.icon}
