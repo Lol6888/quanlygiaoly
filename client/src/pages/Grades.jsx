@@ -107,7 +107,7 @@ export default function Grades() {
       </div>
 
       {classId && (
-        <div style={{ display: 'flex', gap: 18, alignItems: 'flex-start' }}>
+        <div className="grades-layout">
           <div className="panel" style={{ flex: '0 0 280px' }}>
             <h2>Học viên</h2>
             <table>

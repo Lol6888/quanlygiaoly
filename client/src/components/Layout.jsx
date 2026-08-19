@@ -1,4 +1,5 @@
-import { NavLink, useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { NavLink, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../auth.jsx';
 import {
   IconHome, IconStudents, IconClass, IconCheck, IconGrades,
@@ -24,6 +25,11 @@ function initials(name = '') {
 export default function Layout({ children }) {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
+  const [navOpen, setNavOpen] = useState(false);
+
+  // Đóng menu mobile khi chuyển trang
+  useEffect(() => { setNavOpen(false); }, [location.pathname]);
 
   function handleLogout() {
     logout();
@@ -32,7 +38,7 @@ export default function Layout({ children }) {
 
   return (
     <div className="app">
-      <aside className="sidebar">
+      <aside className={`sidebar ${navOpen ? 'open' : ''}`}>
         <div className="brand">
           <div className="logo">✝</div>
           <span>Quản lý Giáo lý</span>
@@ -53,9 +59,12 @@ export default function Layout({ children }) {
           <button className="btn-w" onClick={() => navigate('/students')}>Quản lý học viên</button>
         </div>
       </aside>
+      {navOpen && <div className="nav-backdrop" onClick={() => setNavOpen(false)} />}
 
       <div className="main">
         <header className="topbar">
+          <button className="hamburger" aria-label="Menu" onClick={() => setNavOpen(true)}>☰</button>
+          <div className="topbar-brand"><span className="logo">✝</span> Quản lý Giáo lý</div>
           <div className="greeting">
             <div className="hi">Xin chào, {user?.full_name} 👋</div>
             <div className="sub">Chúc bạn một buổi dạy giáo lý tốt lành</div>
